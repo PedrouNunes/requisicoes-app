@@ -10,7 +10,8 @@ import { AuthenticationService } from '../auth/services/authentication.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  public usuarioLogado?: Observable<firebase.User | null>
+  public usuarioLogado?: Observable<firebase.User | null>;
+  public estaColapsada: boolean = false;
 
   constructor(private  authService: AuthenticationService, private router: Router) { }
 

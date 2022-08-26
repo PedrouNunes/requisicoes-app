@@ -1,17 +1,17 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container">
     <a class="navbar-brand fw-bold" routerLink="/">RequisicoesApp</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button (click)="estaColapsada = !estaColapsada" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse" [ngbCollapse]="!estaColapsada">
 
       <div class="links w-100 fw-semibold" *ngIf="usuarioLogado | async">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a class="nav-link active fw-bold text-primary" aria-current="page" routerLink="/departamentos">Departamentos</a>
           </li>
-          <div class="d-sm-block ms-auto">
+          <div class="ms-auto">
             <a role="button" class="btn btn-primary px-5" (click)="sair()">Sair</a>
             </div>
         </ul>
