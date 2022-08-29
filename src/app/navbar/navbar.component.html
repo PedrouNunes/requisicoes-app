@@ -6,7 +6,7 @@
     </button>
     <div class="collapse navbar-collapse" [ngbCollapse]="!estaColapsada">
 
-      <div class="links w-100 fw-semibold" *ngIf="usuarioLogado | async">
+      <div class="links w-100 fw-semibold" *ngIf = "( usuarioLogado | async)">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a class="nav-link active fw-bold text-primary" aria-current="page" routerLink="/departamentos">Departamentos</a>
