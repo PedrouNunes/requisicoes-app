@@ -17,6 +17,9 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { DepartamentoModule } from './departamentos/departamento.module';
 import { EquipamentoModule } from './equipamentos/equipamento.module';
 
+import { NgxMaskModule } from 'ngx-mask';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +36,10 @@ import { EquipamentoModule } from './equipamentos/equipamento.module';
     AngularFireAuthModule,
     AngularFirestoreModule,
     DepartamentoModule,
-    EquipamentoModule
+    EquipamentoModule,
+    NgxMaskModule.forRoot({
+      dropSpecialCharacters: false
+    })
   ],
   providers: [AuthenticationService],
   bootstrap: [AppComponent]
