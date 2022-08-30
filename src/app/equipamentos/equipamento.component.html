@@ -3,7 +3,7 @@
     <!-- Conteúdo principal -->
     <div class="col-12 col-md-10 col-lg-9 mx-auto">
       <div class="text-center text-md-start">
-        <h1 class="fw-bold text-primary">Departamentos</h1>
+        <h1 class="fw-bold text-primary">Equipamentos</h1>
       </div>
 
       <div class="d-grid gap-2 d-md-block mt-5">
@@ -25,25 +25,29 @@
         <table class="table table-light table-striped table-hover">
           <thead class="thead-dark text-center">
             <tr>
+              <th>Numero de Serie</th>
               <th>Nome</th>
-              <th>Telefone</th>
+              <th>Preço</th>
+              <th>Data</th>
               <th>Ações</th>
             </tr>
           </thead>
           <tbody class="text-center">
-            <tr *ngFor="let departamento of (departamentos$ | async)">
-              <td> {{ departamento.nome }} </td>
-              <td> {{ departamento.telefone }} </td>
+            <tr *ngFor="let equipamento of (equipamentos$ | async)">
+              <td> {{ equipamento.nSerie }} </td>
+              <td> {{ equipamento.nome }} </td>
+              <td> {{ equipamento.preco }} </td>
+              <td> {{ equipamento.data | date:"dd/MM/yyyy" }} </td>
               <td class="d-grid d-md-block">
               <button
-                (click)="gravar(modal, departamento)"
+                (click)="gravar(modal, equipamento)"
                 type="button"
                 class="btn btn-primary me-0 me-md-1 mb-1 mb-md-auto">
                 <i class="pi pi-user-edit"></i>
              </button>
 
             <button
-            (click)="excluir(departamento)"
+            (click)="excluir(equipamento)"
               type="button"
               class="btn btn-outline-danger">
               <i class="pi pi-trash"></i>
@@ -60,26 +64,43 @@
 
 <ng-template #modal let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">{{ tituloModal }} de Departamento</h4>
+    <h4 class="modal-title" id="modal-basic-title">{{ tituloModal }} de Equipamento</h4>
     <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Fechar')"></button>
   </div>
   <form [formGroup]="form" (ngSubmit)="modal.close('gravar')">
   <div class="modal-body">
     <div class="form-group mb-3">
-        <label for="nome" class="form-label">Nome do Departamento</label>
-        <input formControlName="nome"
+        <label for="nSerie" class="form-label">Numero de Serie do Equipamento</label>
+        <input formControlName="nSerie"
         class="form-control"
         type="text"
-        placeholder="Digite o nome do departamento">
+        placeholder="Digite o numero de serie do equipamento">
   </div>
 
   <div class="form-group mb-3">
-    <label for="telefone" class="form-label">Telefone</label>
-    <input formControlName="telefone"
+    <label for="nome" class="form-label">Nome do Equipamento</label>
+    <input formControlName="nome"
     class="form-control"
     type="text"
-    placeholder="Digite o número de telefone do departamento">
+    placeholder="Digite o nome do equipamento">
 </div>
+
+<div class="form-group mb-3">
+  <label for="preco" class="form-label">Preço do Equipamento</label>
+  <input formControlName="preco"
+  class="form-control"
+  type="text"
+  placeholder="Digite o preço do equipamento">
+</div>
+
+<div class="form-group mb-3">
+  <label for="data" class="form-label">Data de fabricação do equipamento</label>
+  <input formControlName="data"
+  class="form-control"
+  type="date"
+  placeholder="Digite a data de fabricação do equipamento">
+</div>
+
   </div>
       <div class="modal-footer">
       <button type="button" class="btn btn-outline-primary col-md-3" (click)="modal.dismiss('fechar')">Cancelar</button>

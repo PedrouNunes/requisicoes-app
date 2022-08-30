@@ -15,6 +15,7 @@ import { AuthenticationService } from './auth/services/authentication.service';
 import { PainelComponent } from './painel/painel.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { DepartamentoModule } from './departamentos/departamento.module';
+import { EquipamentoModule } from './equipamentos/equipamento.module';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { DepartamentoModule } from './departamentos/departamento.module';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
-    DepartamentoModule
+    DepartamentoModule,
+    EquipamentoModule
   ],
   providers: [AuthenticationService],
   bootstrap: [AppComponent]
