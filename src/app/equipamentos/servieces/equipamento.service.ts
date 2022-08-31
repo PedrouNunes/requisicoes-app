@@ -19,7 +19,7 @@ export class EquipamentoService {
         return Promise.reject("Item inválido");
       }
 
-      const res = await this.registros.add(registro);
+    const res = await this.registros.add(registro);
     registro.id = res.id;
     this.registros.doc(res.id).set(registro);
 

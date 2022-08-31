@@ -8,6 +8,8 @@ import { EquipamentoRoutingModule } from './equipamento-routing.module';
 import { EquipamentoComponent } from './equipamento.component';
 
 import { NgxMaskModule } from 'ngx-mask';
+import { EquipamentoService } from './servieces/equipamento.service';
+import { CurrencyMaskModule } from 'ng2-currency-mask';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { NgxMaskModule } from 'ngx-mask';
     NgbModule,
     ReactiveFormsModule,
     EquipamentoRoutingModule,
-    NgxMaskModule.forChild()
-  ]
+    NgxMaskModule.forChild(),
+    CurrencyMaskModule
+  ],
+  providers: [EquipamentoService]
 })
 export class EquipamentoModule { }
