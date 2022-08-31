@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,6 +26,7 @@ import { registerLocaleData } from '@angular/common';
 registerLocaleData(ptBr);
 
 import { LOCALE_ID, DEFAULT_CURRENCY_CODE } from '@angular/core';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,7 @@ import { LOCALE_ID, DEFAULT_CURRENCY_CODE } from '@angular/core';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     ReactiveFormsModule,
     NgbModule,
@@ -45,6 +48,9 @@ import { LOCALE_ID, DEFAULT_CURRENCY_CODE } from '@angular/core';
     EquipamentoModule,
     NgxMaskModule.forRoot({
       dropSpecialCharacters: false
+    }),
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right'
     })
   ],
   providers: [AuthenticationService,
