@@ -27,6 +27,8 @@ registerLocaleData(ptBr);
 
 import { LOCALE_ID, DEFAULT_CURRENCY_CODE } from '@angular/core';
 import { ToastrModule } from 'ngx-toastr';
+import { FuncionarioModule } from './funcionarios/funcionario.module';
+
 
 @NgModule({
   declarations: [
@@ -46,6 +48,7 @@ import { ToastrModule } from 'ngx-toastr';
     AngularFirestoreModule,
     DepartamentoModule,
     EquipamentoModule,
+    FuncionarioModule,
     NgxMaskModule.forRoot({
       dropSpecialCharacters: false
     }),
