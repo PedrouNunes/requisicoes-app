@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  public usuarioLogado?: Observable<firebase.User | null>;
+  public usuarioLogado: Observable<firebase.User | null>;
 
   constructor(private auth: AngularFireAuth) {
     this.usuarioLogado = auth.authState;

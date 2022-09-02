@@ -46,9 +46,7 @@ import { FuncionarioModule } from './funcionarios/funcionario.module';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
-    DepartamentoModule,
-    EquipamentoModule,
-    FuncionarioModule,
+   
     NgxMaskModule.forRoot({
       dropSpecialCharacters: false
     }),

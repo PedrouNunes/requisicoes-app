@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
+import { Departamento } from 'src/app/departamentos/models/departamento.model';
 import { Funcionario } from '../models/funcionario.model';
 
 @Injectable({
@@ -33,7 +34,19 @@ export class FuncionarioService {
   }
 
   public selecionarTodos(): Observable<Funcionario[]>{
-    return this.registros.valueChanges();
+    return this.registros.valueChanges()
+    .pipe(
+      map((funcionarios: Funcionario[]) => {
+        funcionarios.forEach(funcionario => {
+          this.firestore
+            .collection<Departamento>("departamentos")
+            .doc(funcionario.departamentoId)
+            .valueChanges()
+            .subscribe(x => funcionario.departamento = x);
+        });
+        return funcionarios;
+      })
+    )
   }
 
 }
