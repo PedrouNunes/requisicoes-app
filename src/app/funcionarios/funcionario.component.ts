@@ -1,5 +1,5 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
@@ -26,10 +26,10 @@ export class FuncionarioComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.fb.group({
       id: new FormControl(""),
-      nome: new FormControl(""),
-      email: new FormControl(""),
-      funcao: new FormControl(""),
-      departamentoId: new FormControl(""),
+      nome: new FormControl("", [Validators.required, Validators.minLength(3)]),
+      email: new FormControl("", [Validators.required, Validators.email]),
+      funcao: new FormControl("", [Validators.required, Validators.minLength(3)]),
+      departamentoId: new FormControl("", [Validators.required]),
       departamento: new FormControl(""),
     });
     this.funcionarios$ = this.funcionarioService.selecionarTodos();
@@ -44,8 +44,20 @@ export class FuncionarioComponent implements OnInit {
     return this.form.get("id");
   }
 
-  get nome() {
+  get nome(): AbstractControl | null {
     return this.form.get("nome");
+  }
+
+  get email(): AbstractControl | null {
+    return this.form.get("email");
+  }
+
+  get funcao(): AbstractControl | null {
+    return this.form.get("funcao");
+  }
+
+  get departamentoId(): AbstractControl | null {
+    return this.form.get("departamentoId");
   }
 
   public async gravar(modal: TemplateRef<any>, funcionario?: Funcionario){

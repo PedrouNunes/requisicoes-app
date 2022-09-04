@@ -1,6 +1,6 @@
 import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
@@ -23,10 +23,10 @@ export class EquipamentoComponent implements OnInit {
 
     this.form = this.fb.group({
       id: new FormControl(""),
-      nSerie: new FormControl(""),
-      nome : new FormControl(""),
-      preco: new FormControl(""),
-      data : new FormControl(""),
+      nSerie: new FormControl("", [Validators.required]),
+      nome : new FormControl("", [Validators.required, Validators.minLength(3)]),
+      preco: new FormControl("", [Validators.required]),
+      data : new FormControl("", [Validators.required]),
     });
 
     this.equipamentos$ = this.equipamentoService.selecionarTodos();
