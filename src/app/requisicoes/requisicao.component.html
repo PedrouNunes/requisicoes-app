@@ -25,7 +25,7 @@
         <table class="table table-light table-striped table-hover">
           <thead class="thead-dark text-center">
             <tr>
-              <th>Abertura</th>
+              <th>Data de Abertura</th>
               <th>Departamento</th>
               <th>Descrição</th>
               <th>Equipamento</th>
@@ -34,10 +34,10 @@
           </thead>
           <tbody class="text-center">
             <tr *ngFor="let requisicao of (requisicoes$ | async)">
-              <td> {{ requisicao.abertura }} </td>
+              <td> {{ requisicao.dataAbertura.toDate() | date: "dd/MM/yyyy HH:mm" }} </td>
               <td> {{ requisicao.departamento?.nome }} </td>
               <td> {{ requisicao.descricao }} </td>
-              <td> {{ requisicao.equipamento?.nome }} </td>
+              <td> {{ requisicao.equipamento ? requisicao.equipamento.nome : "Não Selecionado" }} </td>
               <td class="d-grid d-md-block">
               <button
                 (click)="gravar(modal, requisicao)"
@@ -64,75 +64,48 @@
 
 <ng-template #modal let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">{{ tituloModal }} de Requisições</h4>
+    <h4 class="modal-title" id="modal-basic-title">{{ tituloModal }} de Requisição</h4>
     <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Fechar')"></button>
   </div>
   <form [formGroup]="form" (ngSubmit)="modal.close('gravar')">
   <div class="modal-body">
 
-    <div formGroupName="requisicao" >
-
-      <div class="form-group mb-3 position-relative">
-        <label for="abertura" class="form-label">Abertura</label>
-        <input formControlName="abertura"
-        [ngClass]="(abertura?.touched && abertura?.invalid) ? 'is-invalid' : ''"
-        class="form-control"
-        type="date"
-        placeholder="Digite o nome do funcionário">
-        <div class="invalid-tooltip" *ngIf="abertura?.touched && abertura?.invalid">
-          <span *ngIf="abertura?.errors?.['required']">A abertura é precisa ser preenchida.</span>
-           </div>
-    </div>
-
     <div class="form-group mb-3 position-relative">
-      <label for="departamentoId" class="form-label">Departamento</label>
-      <ng-select formControlName="departamentoId"
-      [ngClass]="(departamentoId?.touched && departamentoId?.invalid) ? 'is-invalid' : ''"
+      <label for="departamentoId" class="form-label">Departamento destino</label>
+      <ng-select
+      formControlName="departamentoId"
+      placeholder="Selecione um departamento"
       [clearable]="false"
-      [searchable]="false"  >
+      [searchable]="false"
+      class="w-75">
         <ng-option
           *ngFor="let departamento of (departamentos$ | async)"
-          [value]="departamento.id">
-          {{ departamento.nome }}
+          [value]="departamento.id">{{ departamento.nome }}
         </ng-option>
       </ng-select>
-      <div class="invalid-tooltip" *ngIf="departamentoId?.touched && departamentoId?.invalid">
-        <span *ngIf = "departamentoId?.errors?.['required']">O departamentoId precisa ser preenchida.</span>
-       </div>
+
     </div>
 
     <div class="form-group mb-3 position-relative">
-      <label for="descricao" class="form-label">Descrição</label>
-      <input formControlName="descricao"
-      class="form-control"
-      [ngClass]="(descricao?.touched && descricao?.invalid) ? 'is-invalid' : ''"
-      type="text"
-      placeholder="Digite o email do funcionário">
-      <div class="invalid-tooltip" *ngIf="descricao?.touched && descricao?.invalid">
-        <span *ngIf="descricao?.errors?.['required']"> A descricao precisa ser preenchida.</span>
-      </div>
-    </div>
-
-    <div class="form-group mb-3 position-relative">
-      <label for="equipamentoId" class="form-label">Equipamento</label>
-      <ng-select formControlName="equipamentoId"
-      [ngClass]="(equipamentoId?.touched && equipamentoId?.invalid) ? 'is-invalid' : ''"
-      [clearable]="false"
-      [searchable]="false"  >
-        <ng-option *ngFor="let equipamento of (equipamentos$ | async)" [value]="equipamento.id">
-          {{ equipamento.nome }}
+      <label for="equipamentoId" class="form-label">Equipamento (opcional)</label>
+      <ng-select
+      formControlName="equipamentoId"
+      placeholder="Selecione um equipamento"
+      [searchable]="false"
+      class="w-75">
+      <ng-option *ngFor="let equipamento of (equipamentos$ | async)" [value]="equipamento.id">{{ equipamento.nome }}
         </ng-option>
       </ng-select>
-      <div class="invalid-tooltip" *ngIf="equipamentoId?.touched && equipamentoId?.invalid">
-        <span *ngIf = "equipamentoId?.errors?.['required']">O equipamento precisa ser preenchido.</span>
-       </div>
     </div>
 
-    </div>
-
-
-    </div>
-
+  <div class="form-group mb-3 position-relative">
+    <label for="descricao" class="form-label">Descrição</label>
+    <textarea formControlName="descricao"
+    class="form-control"
+    type="text"
+    placeholder="Digite a descrição do funcionário"></textarea>
+  </div>
+  </div>
 
       <div class="modal-footer">
       <button type="button" class="btn btn-outline-primary col-md-3" (click)="modal.dismiss('fechar')">Cancelar</button>
