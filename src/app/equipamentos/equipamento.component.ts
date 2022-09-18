@@ -1,9 +1,10 @@
-import { ThisReceiver } from '@angular/compiler';
+
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
+import { dataFuturaValidator } from '../shared/validator/data-Futura.validators';
 import { Equipamento } from './models/equipamento.models';
 import { EquipamentoService } from './servieces/equipamento.service';
 
@@ -26,7 +27,7 @@ export class EquipamentoComponent implements OnInit {
       nSerie: new FormControl("", [Validators.required]),
       nome : new FormControl("", [Validators.required, Validators.minLength(3)]),
       preco: new FormControl("", [Validators.required]),
-      data : new FormControl("", [Validators.required]),
+      data : new FormControl("", [Validators.required, dataFuturaValidator()]),
     });
 
     this.equipamentos$ = this.equipamentoService.selecionarTodos();

@@ -114,7 +114,8 @@
   [ngClass]="(data?.touched && data?.invalid) ? 'is-invalid' : ''"
   type="date">
   <div class="invalid-tooltip" *ngIf="data?.touched && data?.invalid">
-    <span *ngIf="data?.errors?.['required']">a data precisa ser preenchida.</span>
+    <span *ngIf="data?.errors?.['required']">A data precisa ser preenchida.</span>
+    <span *ngIf="data?.errors?.['datafutura']">A data não pode exceder hoje.</span>
   </div>
 </div>
 
